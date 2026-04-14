@@ -1,0 +1,15 @@
+name: Tennis Bot Cron
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch: 
+
+jobs:
+  ping-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chiama lo script su Altervista
+        run: |
+          curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0" \
+          "https://fantaranking.altervista.org/check_tennis.php"
