@@ -1,15 +1,16 @@
-name: Tennis Bot Cron Ogni Minuto
+name: Tennis Bot Daily Cron
 
 on:
   schedule:
-    - cron: '* * * * *' # Gira ogni singolo minuto
-  workflow_dispatch: # Ti permette di farlo partire a mano per testare
+    # 10:00 UTC corrisponde alle 12:00 in Italia (ora legale)
+    # Se in inverno noti che arriva alle 11:00, sposta a '0 11 * * *'
+    - cron: '0 10 * * *'
+  workflow_dispatch: # Questo ti permette di farlo partire a mano per test
 
 jobs:
   ping-site:
     runs-on: ubuntu-latest
     steps:
-      - name: Chiama lo script su Altervista
+      - name: Esegui Controllo Giornaliero
         run: |
-          curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
-          "https://fantaranking.altervista.org/check_tennis.php"
+          curl -s -A "Mozilla/5.0" "https://fantaranking.altervista.org/check_tennis.php"
